@@ -8,7 +8,7 @@ import { MediaOptions, MediaOptionsWithUrl, Output, ErrorOutput } from './../ind
  * @returns {Promise<Output | ErrorOutput>} 
  */
 
-export default async function getTwitterMedia(url: string | MediaOptionsWithUrl, options?: MediaOptions): Promise<Output | ErrorOutput> {
+export = async function getTwitterMedia(url: string | MediaOptionsWithUrl, options?: MediaOptions): Promise<Output | ErrorOutput> {
     
     let input: MediaOptionsWithUrl = {} as any
 
@@ -25,6 +25,7 @@ export default async function getTwitterMedia(url: string | MediaOptionsWithUrl,
         let result = await Axios.get(apiURL).then((res: any) => res.data ).catch((err: any) => {
             return { found: false, error: 'An issue occured. Make sure the twitter link is valid.' }
         })
+        if(!result.media_extended) return { found: false, error: 'No media found' }
         let output: Output = {
             found: true,
             type: result.media_extended[0].type,
