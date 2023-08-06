@@ -1,8 +1,8 @@
 {
   "name": "get-twitter-media",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Get media from tweets quick and easy.",
-  "main": "getTwitterMedia.js",
+  "main": "dist/getTwitterMedia.js",
   "scripts": {
     "test": "node test.js"
   },
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "twitter",
+    "tweet",
     "media",
     "link",
     "get",
@@ -26,12 +27,17 @@
     "url",
     "image",
     "download",
-    "downloader"
+    "downloader",
+    "X",
+    "elon"
   ],
   "author": "Xeukxz",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.1.2",
-    "cheerio": "^1.0.0-rc.12"
-  }
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "types": "index.d.ts",
+  "type": "module"
 }
