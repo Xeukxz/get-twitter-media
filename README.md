@@ -19,7 +19,7 @@ getTwitterMedia(url, options)
 `Example with buffer:`
 ```js
 const getTwitterMedia = require('get-twitter-media');
-let media = await getTwitterMedia("https://twitter.com/msVrXx/status/1577289590746091520", {
+let media = await getTwitterMedia("https://twitter.com/CursedVideos/status/1687071264848879616?s=20", {
                     buffer: true
                   });
 console.log(media);
@@ -39,7 +39,7 @@ console.log(media);
 `Example with text:`
 ```js
 const getTwitterMedia = require('get-twitter-media');
-let media = await getTwitterMedia(testURLs.image, {
+let media = await getTwitterMedia("https://twitter.com/TurnkeyPet/status/1523047586998865920", {
               text: true,
             });
 console.log(media);
@@ -78,6 +78,6 @@ export interface ErrorOutput {
     error: string
 }
 
-export default function getTwitterMedia(url: string | MediaOptionsWithUrl, options?: MediaOptions): Promise<Output>
+export function getTwitterMedia(url: string | MediaOptionsWithUrl, options?: MediaOptions): Promise<Output>
 
 ```

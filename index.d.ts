@@ -19,4 +19,4 @@ export interface ErrorOutput {
     error: string
 }
 
-export default function getTwitterMedia(url: string | MediaOptionsWithUrl, options?: MediaOptions): Promise<Output>
+export function getTwitterMedia(url: string | MediaOptionsWithUrl, options?: MediaOptions): Promise<Output>
