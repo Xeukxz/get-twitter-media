@@ -33,20 +33,26 @@ module.exports = function getTwitterMedia(url, options) {
             });
             if (!result.media_extended)
                 return { found: false, error: 'No media found' };
+            let media = [];
+            result.media_extended.forEach((mediaItem, i) => __awaiter(this, void 0, void 0, function* () {
+                media[i] = {
+                    url: mediaItem.url
+                };
+                if (input.buffer)
+                    media[i].buffer = yield axios_1.default.get(mediaItem.url, { responseType: 'arraybuffer' }).then((res) => {
+                        return Buffer.from(res.data, 'binary');
+                    }).catch((err) => {
+                        console.warn('Error getting buffer: ', err);
+                        return undefined;
+                    });
+            }));
             let output = {
                 found: true,
                 type: result.media_extended[0].type,
-                url: result.media_extended[0].url
+                media: media
             };
             if (input.text)
                 output.text = result.text;
-            if (input.buffer)
-                output.buffer = yield axios_1.default.get(output.url, { responseType: 'arraybuffer' }).then((res) => {
-                    return Buffer.from(res.data, 'binary');
-                }).catch((err) => {
-                    console.log('Error getting buffer: ', err);
-                    return undefined;
-                });
             return output;
         }
         else

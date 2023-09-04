@@ -26,18 +26,25 @@ export = async function getTwitterMedia(url: string | MediaOptionsWithUrl, optio
             return { found: false, error: 'An issue occured. Make sure the twitter link is valid.' }
         })
         if(!result.media_extended) return { found: false, error: 'No media found' }
+        let media: { url: string, buffer?: Buffer, text?: string }[] = []
+        result.media_extended.forEach( async (mediaItem: any, i: number) => {
+            media[i] = {
+                url: mediaItem.url
+            }
+            if(input.buffer) media[i].buffer = await Axios.get(mediaItem.url, { responseType: 'arraybuffer' }).then((res: any) => {
+                return Buffer.from(res.data, 'binary') as Buffer
+            }).catch((err: any) => {
+                console.warn('Error getting buffer: ', err)
+                return undefined
+            })
+        })
+        
         let output: Output = {
             found: true,
             type: result.media_extended[0].type,
-            url: result.media_extended[0].url
+            media: media
         }
         if(input.text) output.text = result.text
-        if(input.buffer) output.buffer = await Axios.get(output.url, { responseType: 'arraybuffer' }).then((res: any) => {
-            return Buffer.from(res.data, 'binary') as Buffer
-        }).catch((err: any) => {
-            console.log('Error getting buffer: ', err)
-            return undefined
-        })
 
         return output
     } else return { found: false, error: `Invalid URL: ${input.url}` }

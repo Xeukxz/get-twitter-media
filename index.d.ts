@@ -10,9 +10,12 @@ export interface MediaOptionsWithUrl extends MediaOptions {
 export interface Output {
     found: true
     type: "video" | "image" | "gif"
-    url: string
-    buffer?: Buffer
+    media: {
+            url: string
+            buffer?: Buffer
+        }[]
     text?: string
+    
 }
 export interface ErrorOutput {
     found: false

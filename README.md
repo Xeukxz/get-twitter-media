@@ -30,8 +30,10 @@ console.log(media);
 {
   found: true,
   type: 'Video',
-  url: 'https://video.twimg.com/amplify_video/1687071206959177728/vid/854x480/SlOcOcqfwdfNhtdk.mp4?tag=14',
-  buffer: <Buffer 00 00 00 1c 66 74 79 70 6d 70  ... 3522918 more bytes> 
+  media: {
+    url: 'https://video.twimg.com/amplify_video/1687071206959177728/vid/854x480/SlOcOcqfwdfNhtdk.mp4?tag=14',
+    buffer: <Buffer 00 00 00 1c 66 74 79 70 6d 70  ... 3522918 more bytes> 
+  }
 }
 ```
 
@@ -40,17 +42,19 @@ console.log(media);
 ```js
 const getTwitterMedia = require('get-twitter-media');
 let media = await getTwitterMedia("https://twitter.com/TurnkeyPet/status/1523047586998865920", {
-              text: true,
+                    text: true,
             });
 console.log(media);
 ```
 
-`Output without buffer:`
+`Output with text:`
 ```js
 {
   found: true,
   type: 'image',
-  url: 'https://pbs.twimg.com/media/FSLztSMVcAA84nP.jpg',
+  media: {
+    url: 'https://pbs.twimg.com/media/FSLztSMVcAA84nP.jpg'
+  },
   text: "My little rescue dog..Iris who is blind now due to cruel treatment, we have had her a year now had one eye taken out and lots of other things done and she's now a little monkey!! https://t.co/BKqd0ruHzc"
 }
 ```
@@ -69,8 +73,10 @@ export interface MediaOptionsWithUrl extends MediaOptions {
 export interface Output {
     found: true
     type: "video" | "image" | "gif"
-    url: string
-    buffer?: Buffer
+    media: {
+        url: string
+        buffer?: Buffer
+    }
     text?: string
 }
 export interface ErrorOutput {
