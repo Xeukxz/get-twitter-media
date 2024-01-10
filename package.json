@@ -1,6 +1,6 @@
 {
   "name": "get-twitter-media",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Get media from tweets quick and easy.",
   "main": "dist/getTwitterMedia.js",
   "scripts": {
