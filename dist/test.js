@@ -20,11 +20,31 @@ const testURLs = {
     video: "https://twitter.com/CursedVideos/status/1687071264848879616?s=20",
     gif: "https://twitter.com/archillect/status/1687161588854243343?s=20",
     multiMedia: "https://twitter.com/0xgaut/status/1698724639260688661?s=20",
-    fail: "https://twitter.com/tsaminaminaehehwakawakaehehtsaminaminazangalewaitstimeforafrica"
+    xDomain: "https://x.com/CursedVideos/status/1687071264848879616?s=20", // x.com 
+    fail: "https://twitter.com/tsaminaminaehehwakawakaehehtsaminaminazangalewaitstimeforafrica",
 };
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    let res = yield (0, getTwitterMedia_js_1.default)(testURLs.multiMedia, {
-        text: true,
+function test(url = "all") {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (url === "all") {
+            let testResults = [];
+            for (let url in testURLs) {
+                testResults.push(yield test(url));
+            }
+            return testResults.join("\n");
+        }
+        else {
+            let res = yield (0, getTwitterMedia_js_1.default)(testURLs[url], {
+                text: true,
+            }).then((res) => {
+                return `Test ${res.found ? 'passed 🟢' : 'failed 🔴'} for ${url}: ${JSON.stringify(res, null, 2)}\n`;
+            }).catch((err) => {
+                return `Test failed for ${url}\n\n${err}\n`;
+            });
+            return res;
+        }
     });
+}
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    let res = yield test("all");
     console.log(res);
 }))();
