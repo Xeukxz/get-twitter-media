@@ -26,8 +26,8 @@ module.exports = function getTwitterMedia(url, options) {
             return { found: false, error: 'Invalid first argument' };
         if (options)
             Object.keys(options).forEach((key) => input[key] = options[key]);
-        if (/\/\/twitter.com/.test(input.url)) {
-            let apiURL = input.url.replace('//twitter.com', '//api.vxtwitter.com');
+        if (/twitter\.com|x\.com/.test(input.url)) {
+            let apiURL = input.url.replace(/twitter\.com|x\.com/g, 'api.vxtwitter.com');
             let result = yield axios_1.default.get(apiURL).then((res) => res.data).catch((err) => {
                 return { found: false, error: 'An issue occured. Make sure the twitter link is valid.' };
             });

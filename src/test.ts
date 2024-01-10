@@ -9,15 +9,16 @@ const testURLs = {
   video: "https://twitter.com/CursedVideos/status/1687071264848879616?s=20",
   gif: "https://twitter.com/archillect/status/1687161588854243343?s=20",
   multiMedia: "https://twitter.com/0xgaut/status/1698724639260688661?s=20",
-  fail: "https://twitter.com/tsaminaminaehehwakawakaehehtsaminaminazangalewaitstimeforafrica"
+  fail: "https://twitter.com/tsaminaminaehehwakawakaehehtsaminaminazangalewaitstimeforafrica",
+  xDomain: "https://twitter.com/CursedVideos/status/1687071264848879616?s=20", // x.com 
 };
 
 
 
 (async () => {
-  let res = await getTwitterMedia(testURLs.multiMedia, {
-        text: true,
-      });
+  let res = await getTwitterMedia(testURLs.xDomain, {
+    text: true,
+  });
 
   console.log(res)
 })()
